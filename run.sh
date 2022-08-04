@@ -1,0 +1,2 @@
+CUDA_VISIBLE_DEVICES=0 python cifar10_eval.py
+CUDA_VISIBLE_DEVICES=0 python cifar10_eval.py
