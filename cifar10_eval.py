@@ -59,15 +59,13 @@ def image_decoder(clip_model, berttokenizer, device, image_loaders=None):
                    ['ship', 'automobile', 'dog', 'cat', 'deer', 'frog', 'airplane', 'truck', 'bird', 'horse']]
     ablation_splits = [['airplane', 'automobile', 'truck', 'horse', 'cat', 'bird', 'ship', 'dog', 'deer', 'frog'],
                        ['airplane', 'automobile', 'truck', 'bird', 'ship', 'frog', 'deer', 'dog', 'horse', 'cat']]
-    #ablation_splits = [['horse', 'cat', 'deer', 'frog'],
-    #                   ['deer', 'frog', 'horse', 'cat']]
 
     auc_list_sum = []
     for split in ablation_splits:
-        seen_labels = split[:8]
+        seen_labels = split[:6]
         seen_descriptions = [f"This is a photo of a {label}" for label in seen_labels]
-        #targets = torch.tensor(6000*[0] + 4000*[1])
-        targets = torch.tensor(8000*[0] + 2000*[1])
+        targets = torch.tensor(6000*[0] + 4000*[1])
+        #targets = torch.tensor(8000*[0] + 2000*[1])
         #targets = torch.tensor(20 * [0] + 20 * [1])
         max_num_entities=0
         ood_probs_sum = []
@@ -120,7 +118,6 @@ if __name__ == '__main__':
 
     # initialize tokenizers for clip and bert, these two use different tokenizers
     berttokenizer = BertGenerationTokenizer.from_pretrained('google/bert_for_seq_generation_L-24_bbc_encoder')
-
     clip_model = torch.jit.load(os.path.join('./trained_models', "{}.pt".format('ViT-B32'))).to(device).eval()
     cliptokenizer = clip_tokenizer()
 
@@ -133,4 +130,3 @@ if __name__ == '__main__':
 
     cifar10_loaders = cifar10_single_isolated_class_loader()
     image_decoder(clip_model, berttokenizer, device, image_loaders=cifar10_loaders)
-
