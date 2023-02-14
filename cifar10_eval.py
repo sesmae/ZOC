@@ -83,7 +83,7 @@ def image_decoder(clip_model, berttokenizer, device, image_loaders=None):
                 target_tokens = [berttokenizer.decode(int(pred_idx.cpu().numpy())) for pred_idx in target_list]
                 topk_tokens = [berttokenizer.decode(int(pred_idx.cpu().numpy())) for pred_idx in topk_list]
 
-                unique_entities = list(set(topk_tokens) - {semantic_label})
+                unique_entities = list(set(topk_tokens) - set(seen_labels))
                 if len(unique_entities) > max_num_entities:
                     max_num_entities = len(unique_entities)
                 all_desc = seen_descriptions + [f"This is a photo of a {label}" for label in unique_entities]
