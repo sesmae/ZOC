@@ -11,6 +11,9 @@ cifar10, cifar100 and cifarplus are available in torchvision datasets. Tinyimage
 
 `python train_decoder.py` 
 
+## Decoder checkpoint
+The fine-tuned decoder weights can be downloaded from [this Google Drive link](https://drive.google.com/file/d/1Jqz0-CW66UBNGujdvsOW00-mzMenOoJB/view?usp=sharing)
+
 ## Evaluation 
 Every evaluation script loads the fine-tuned decoder from training step, please run one of the following for test results :
 
